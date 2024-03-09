@@ -5,18 +5,11 @@ import (
 	"arsenal/database"
 	"database/sql"
 	"fmt"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
-)
-
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "postgres"
-	password = "fleco1308"
-	dbname   = "practice"
 )
 
 var (
@@ -32,9 +25,13 @@ func main() {
 		fmt.Println("succes load environtment")
 	}
 
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
+	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s "+
 		"password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbname,
+		os.Getenv("PGHOST"),
+		os.Getenv("PGPORT"),
+		os.Getenv("PGUSER"),
+		os.Getenv("PGPASSWORD"),
+		os.Getenv("PGDATABASE"),
 	)
 
 	DB, err = sql.Open("postgres", psqlInfo)
