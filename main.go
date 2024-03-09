@@ -49,7 +49,7 @@ func main() {
 
 	//Route
 	router := gin.Default()
-	router.GET("/persons", func(c *gin.Context) {
+	router.GET("/", func(c *gin.Context) {
 		result := gin.H{"result": "hello from arsenal players app"}
 		c.JSON(http.StatusOK, result)
 	})
