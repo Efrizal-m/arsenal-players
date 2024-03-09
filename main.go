@@ -49,7 +49,7 @@ func main() {
 
 	//Route
 	router := gin.Default()
-	router.GET("/", func(c *gin.Context) {
+	router.GET("/persons", func(c *gin.Context) {
 		result := gin.H{"result": "hello from arsenal players app"}
 		c.JSON(http.StatusOK, result)
 	})
@@ -58,5 +58,16 @@ func main() {
 	router.PUT("/persons/:id", controllers.UpdatePerson)
 	router.DELETE("/persons/:id", controllers.DeletePerson)
 
-	router.Run("localhost:8080")
+	port := envPortOr("8080")
+	err := router.Run(port)
+	if err != nil {
+		panic("[Error] failed to start Gin server due to: " + err.Error())
+	}
+}
+
+func envPortOr(port string) string {
+	if envPort := os.Getenv("PORT"); envPort != "" {
+		return ":" + envPort
+	}
+	return ":" + port
 }
