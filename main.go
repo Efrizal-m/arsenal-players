@@ -5,6 +5,7 @@ import (
 	"arsenal/database"
 	"database/sql"
 	"fmt"
+	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -48,6 +49,10 @@ func main() {
 
 	//Route
 	router := gin.Default()
+	router.GET("/", func(c *gin.Context) {
+		result := gin.H{"result": "hello from arsenal players app"}
+		c.JSON(http.StatusOK, result)
+	})
 	router.GET("/persons", controllers.GetAllPerson)
 	router.POST("/persons", controllers.InsertPerson)
 	router.PUT("/persons/:id", controllers.UpdatePerson)
