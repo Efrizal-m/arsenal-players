@@ -27,7 +27,7 @@ func GetAllPerson(db *sql.DB) (err error, results []structs.Person) {
 }
 
 func InsertPerson(db *sql.DB, person structs.Person) (err error) {
-	sql := "INSERT INTO person (id, firstname, last_name) VALUES ($1, $2, $3)"
+	sql := "INSERT INTO person (id, first_name, last_name) VALUES ($1, $2, $3)"
 	errs := db.QueryRow(sql, person.ID, person.FirstName, person.LastName)
 	return errs.Err()
 }
@@ -39,7 +39,7 @@ func UpdatePerson(db *sql.DB, person structs.Person) (err error) {
 }
 
 func DeletePerson(db *sql.DB, person structs.Person) (err error) {
-	sql := "DELETE FROM person WHERE id = $3"
+	sql := "DELETE FROM person WHERE id = $1"
 	errs := db.QueryRow(sql, person.ID)
 	return errs.Err()
 }
