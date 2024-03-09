@@ -58,7 +58,7 @@ func main() {
 	router.PUT("/persons/:id", controllers.UpdatePerson)
 	router.DELETE("/persons/:id", controllers.DeletePerson)
 
-	port := envPortOr("8080")
+	port := envPortOr("3000")
 	err := router.Run(port)
 	if err != nil {
 		panic("[Error] failed to start Gin server due to: " + err.Error())
